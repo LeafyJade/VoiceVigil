@@ -7,9 +7,11 @@ For first time setup, use your terminal to run:
 npm install discord.js
 ```
 
+The Discord API can be found here: https://discord.js.org/#/docs/discord.js/stable/general/welcome
+
 To update /text commands, run this in your terminal: 
 ```
-node deploy-comands.js
+node deploy-commands.js
 ```
 
 To run the Voice Vigil bot (please first check if it is already online, in which case you do not need to do this), run: 
