@@ -7,7 +7,13 @@ For first time setup, use your terminal to run:
 npm install discord.js
 ```
 
-The Discord API can be found here: https://discord.js.org/#/docs/discord.js/stable/general/welcome
+Use: 
+```
+npm list discord.js
+```
+To check your Discord.js version. I am using 14.13.0.
+
+The Discord API can be found here: https://discord.js.org/#/docs/discord.js/stable/general/welcome though I think it is for version 13. Will get back to you on this. 
 
 To update /text commands, run this in your terminal: 
 ```
