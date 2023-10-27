@@ -4,16 +4,21 @@ DO NOT, under ANY circumstances, commit/push the .env or config.json file provid
 
 For first time setup, use your terminal to run: 
 ```
-npm install discord.js
+npm install discord.js13@npm:discord.js@13.16.0
 ```
+
+We will be using Discord.js 13.16.0 for now, as there is the most documentation for it. 
 
 Use: 
 ```
 npm list discord.js
 ```
-To check your Discord.js version. I am using 14.13.0.
+To check your Discord.js version. If you have multiple versions of Discord.js, this may return another value. You can check you have succesfully installed Discord.js 13 with: 
+```
+npm list discord.js13
+```
 
-The Discord API can be found here: https://discord.js.org/#/docs/discord.js/stable/general/welcome though I think it is for version 13. Will get back to you on this. 
+The Discord API can be found here: https://discord.js.org/#/docs/discord.js/stable/general/welcome 
 
 To update /text commands, run this in your terminal: 
 ```

@@ -1,18 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const Discord = require('discord.js');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');  
+const Discord = require('discord.js13');
+const { Client, Collection, Intents } = require('discord.js13');  
 const { token } = require('./config.json');
 // require('dotenv').config();
 
-const myIntents = [
-	GatewayIntentBits.Guilds,
-	GatewayIntentBits.GuildMembers,
-	GatewayIntentBits.GuildMessages,
-	GatewayIntentBits.GuildMessageReactions,
-	GatewayIntentBits.GuildVoiceStates,
-	GatewayIntentBits.GuildPresences
-];
+const myIntents = new Intents();
+myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_TYPING, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_PRESENCES);
 
 const client = new Client({ intents: myIntents });
 
