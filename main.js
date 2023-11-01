@@ -20,27 +20,14 @@ const myIntents = [
 const client = new Client({ intents: myIntents });
 addSpeechEvent(client);
 
-// JOIN VC 
-client.on(Events.MessageCreate, (msg) => {
-	const voiceChannel = msg.member?.voice.channel;
-	if (voiceChannel) {
-	  joinVoiceChannel({
-		channelId: voiceChannel.id,
-		guildId: voiceChannel.guild.id,
-		adapterCreator: voiceChannel.guild.voiceAdapterCreator,
-		selfDeaf: false,
-	  });
-	}
-  });
-
 // SPEECH TRANSCRIPTION 
 client.on(SpeechEvents.speech, (msg) => {
 	// If bot didn't recognize speech, content will be empty
 	if (!msg.content) {
 		return;
 	}
-	const channel = client.channels.cache.find(channel => channel.id === "1154685403316637696");
-	channel.send(msg.content);
+	const channel = client.channels.cache.find(channel => channel.id === "1169407845838630923"); // hardcoded transcription text channel ID
+	channel.send(msg.author.username + ": " + msg.content);
 	// msg.author.send(msg.content);
   });
 
