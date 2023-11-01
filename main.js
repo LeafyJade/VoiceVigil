@@ -1,14 +1,48 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const Discord = require('discord.js13');
-const { Client, Collection, Intents } = require('discord.js13');  
+const Discord = require('discord.js');
+const { joinVoiceChannel } = require("@discordjs/voice");
+const { addSpeechEvent, SpeechEvents } = require("discord-speech-recognition");
+const { Client, Collection, GatewayIntentBits, Events } = require('discord.js');  
 const { token } = require('./config.json');
-// require('dotenv').config();
 
-const myIntents = new Intents();
-myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_TYPING, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_PRESENCES);
-
+const myIntents = [
+	GatewayIntentBits.Guilds,
+	GatewayIntentBits.GuildBans,
+	GatewayIntentBits.GuildMembers,
+	GatewayIntentBits.GuildMessages,
+	GatewayIntentBits.GuildMessageReactions,
+	GatewayIntentBits.GuildVoiceStates,
+	GatewayIntentBits.GuildPresences,
+	GatewayIntentBits.DirectMessages,
+	GatewayIntentBits.MessageContent,
+];
 const client = new Client({ intents: myIntents });
+addSpeechEvent(client);
+
+// JOIN VC 
+client.on(Events.MessageCreate, (msg) => {
+	const voiceChannel = msg.member?.voice.channel;
+	if (voiceChannel) {
+	  joinVoiceChannel({
+		channelId: voiceChannel.id,
+		guildId: voiceChannel.guild.id,
+		adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+		selfDeaf: false,
+	  });
+	}
+  });
+
+// SPEECH TRANSCRIPTION 
+client.on(SpeechEvents.speech, (msg) => {
+	// If bot didn't recognize speech, content will be empty
+	if (!msg.content) {
+		return;
+	}
+	const channel = client.channels.cache.find(channel => channel.id === "1154685403316637696");
+	channel.send(msg.content);
+	// msg.author.send(msg.content);
+  });
 
 // add Event handlers
 const eventsPath = path.join(__dirname, 'events');
