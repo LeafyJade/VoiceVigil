@@ -20,6 +20,8 @@ const myIntents = [
 const client = new Client({ intents: myIntents });
 addSpeechEvent(client);
 
+
+
 // SPEECH TRANSCRIPTION 
 client.on(SpeechEvents.speech, (msg) => {
 	// If bot didn't recognize speech, content will be empty
