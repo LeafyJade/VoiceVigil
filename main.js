@@ -15,12 +15,15 @@ const myIntents = [
 	GatewayIntentBits.GuildVoiceStates,
 	GatewayIntentBits.GuildPresences,
 	GatewayIntentBits.DirectMessages,
-	GatewayIntentBits.MessageContent,
 ];
 const client = new Client({ intents: myIntents });
 addSpeechEvent(client);
 
-
+// Banned words list
+const bannedWords = new Set();
+bannedWords.add("bubbles");
+bannedWords.add("s***");
+bannedWords.add("f***");
 
 // SPEECH TRANSCRIPTION 
 client.on(SpeechEvents.speech, (msg) => {
@@ -31,7 +34,19 @@ client.on(SpeechEvents.speech, (msg) => {
 	const channel = client.channels.cache.find(channel => channel.id === "1169407845838630923"); // hardcoded transcription text channel ID
 	channel.send(msg.author.username + ": " + msg.content);
 	// msg.author.send(msg.content);
-  });
+  
+  // Convert message to array by splitting
+  const messageArray = msg.content.split(" ");
+  for (let i = 0; i < messageArray.length; i++) {
+    // Convert each word to lowercase for comparison
+    messageArray[i] = messageArray[i].toLowerCase();
+    if (bannedWords.has(messageArray[i])) {
+      // Detect if word is in banned list
+      channel.send(msg.author.username + " said banned word " + messageArray[i] +"!");
+      console.log(msg.author.username + " said banned word " + messageArray[i] +"!");
+    }
+  }
+});
 
 // add Event handlers
 const eventsPath = path.join(__dirname, 'events');
