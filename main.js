@@ -49,13 +49,13 @@ client.on(SpeechEvents.speech, (msg) => {
       if(userCount[msg.author.username]==0){
 		member.voice.setMute(true).then(()=>{
 			channel.send(msg.author.username + " said banned word " + messageArray[i] +" firstly, has been muted");
-			userCount[message.author.username]= userCount[message.author.username]+1;
+			userCount[msg.author.username]= userCount[msg.author.username]+1;
 		})
 	  }
 	  else if(userCount[msg.author.username]==1){
 		member.kick().then(()=>{
 			channel.send(msg.author.username + " said banned word " + messageArray[i] +" secondly, has been kicked");
-			userCount[message.author.username]= userCount[message.author.username]+1;
+			userCount[msg.author.username]= userCount[msg.author.username]+1;
 	  })
 	}
 	  else {
