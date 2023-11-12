@@ -18,6 +18,8 @@ const myIntents = [
 ];
 const client = new Client({ intents: myIntents });
 addSpeechEvent(client);
+// User List to store the times that said baned word
+global.userCount = {}
 
 // Banned words list
 const bannedWords = new Set();
@@ -31,6 +33,7 @@ client.on(SpeechEvents.speech, (msg) => {
 	if (!msg.content) {
 		return;
 	}
+	
 	const channel = client.channels.cache.find(channel => channel.id === "1169407845838630923"); // hardcoded transcription text channel ID
 	channel.send(msg.author.username + ": " + msg.content);
 	// msg.author.send(msg.content);
@@ -42,11 +45,31 @@ client.on(SpeechEvents.speech, (msg) => {
     messageArray[i] = messageArray[i].toLowerCase();
     if (bannedWords.has(messageArray[i])) {
       // Detect if word is in banned list
-      channel.send(msg.author.username + " said banned word " + messageArray[i] +"!");
-      console.log(msg.author.username + " said banned word " + messageArray[i] +"!");
+	  const member = msg.guild.members.cache.get(msg.author.id);
+      if(userCount[msg.author.username]==0){
+		member.voice.setMute(true).then(()=>{
+			channel.send(msg.author.username + " said banned word " + messageArray[i] +" firstly, has been muted");
+			userCount[message.author.username]= userCount[message.author.username]+1;
+		})
+	  }
+	  else if(userCount[msg.author.username]==1){
+		member.kick().then(()=>{
+			channel.send(msg.author.username + " said banned word " + messageArray[i] +" secondly, has been kicked");
+			userCount[message.author.username]= userCount[message.author.username]+1;
+	  })
+	}
+	  else {
+		member.kick().then(()=>{
+			channel.send(msg.author.username + " said banned word " + messageArray[i] +" thirdly, has been banned");
+	  })
+	  //channel.send(msg.author.username + " said banned word " + messageArray[i] +"!");
+      //console.log(msg.author.username + " said banned word " + messageArray[i] +"!");
     }
+	break;
   }
-});
+}
+}
+);
 
 // add Event handlers
 const eventsPath = path.join(__dirname, 'events');
