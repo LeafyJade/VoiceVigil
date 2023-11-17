@@ -24,14 +24,15 @@ global.userCount = {}
 // Banned words list
 const bannedWords = new Set();
 bannedWords.add("bubbles");
-bannedWords.add("s***");
-bannedWords.add("f***");
-bannedWords.add("f*"); // fucker
+bannedWords.add("s***"); // shit
+bannedWords.add("f***"); // fuck
+bannedWords.add("f*****"); // fucker
 bannedWords.add("ass");
-bannedWords.add("a**"); // asshole
-bannedWords.add("motherfuker");
-bannedWords.add("b**"); // bitch
+bannedWords.add("a******"); // asshole
+bannedWords.add("motherfuker"); // yes, it is spelled weird. No, I do not know why. It works, though
+bannedWords.add("b****"); // bitch
 bannedWords.add("bastard");
+bannedWords.add("b*******"); // bullshit
 bannedWords.add("damn");
 
 // SPEECH TRANSCRIPTION 
@@ -44,7 +45,6 @@ client.on(SpeechEvents.speech, (msg) => {
 	const channel = client.channels.cache.find(channel => channel.id === "1169407845838630923"); // hardcoded transcription text channel ID.
 	const warning_channel = client.channels.cache.find(channel => channel.id === "1175147876456861756"); // harded coded warning channel for users to see their mess-ups. 
 	channel.send(msg.author.username + ": " + msg.content);
-	// msg.author.send(msg.content);
 
 	// Convert message to array by splitting
 	const messageArray = msg.content.split(" ");
