@@ -35,6 +35,14 @@ bannedWords.add("bastard");
 bannedWords.add("b*******"); // bullshit
 bannedWords.add("damn");
 
+// POTENTIALLY FIXES THIS ERROR: https://stackoverflow.com/questions/8313628/how-to-emitter-setmaxlisteners
+/* 
+(node:26908) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 end listeners added to [AudioReceiveStream]. Use emitter.setMaxListeners() to increase limit
+(Use node --trace-warnings ... to show where the warning was created)
+*/
+// IF THIS CAUSES ISSUES, REMOVE THIS LINE v
+require('events').EventEmitter.defaultMaxListeners = 50;
+
 // SPEECH TRANSCRIPTION 
 client.on(SpeechEvents.speech, (msg) => {
 	// If bot didn't recognize speech, content will be empty
