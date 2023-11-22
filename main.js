@@ -22,7 +22,7 @@ addSpeechEvent(client);
 global.userCount = {}
 
 // Banned words list
-const bannedWords = new Set();
+global.bannedWords = new Set();
 bannedWords.add("bubbles"); 
 bannedWords.add("s***"); // shit
 bannedWords.add("f***"); // fuck
@@ -90,6 +90,7 @@ client.on(SpeechEvents.speech, (msg) => {
 					channel.send(msg.author.username + " said this banned word: " + messageArray[i] + ". This is a third warning. The user has been kicked from the voice channel and muted.");
 					userCount[msg.author.username] = userCount[msg.author.username] + 1;
 				})
+			// Here, to fix error when users do not allow dms from strangers: https://stackoverflow.com/questions/71542766/bot-crashed-when-trying-to-dm
 			} else if (userCount[msg.author.username] == 3){
 				member.kick().then(()=>{
 					let errorCatch = msg.author.send(msg.author.username + ", you said " + messageArray[i] + ", which is flagged as a bad word. Since this was your fourth warning, you have been kicked from the server. You may re-join the server, but will be banned if you have another offence. You may appeal this with a moderator to reset your warnings.").catch(e=>{warning_channel.send("We were unable to send " + msg.author.toString() + " a message, but they said " + messageArray[i] + ", which is flagged as a bad word. They have been kicked from the server and will be banned if they come back and make another offence.")});
