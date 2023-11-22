@@ -23,10 +23,14 @@ global.userCount = {}
 
 // Banned words list
 const bannedWords = new Set();
-bannedWords.add("bubbles");
+bannedWords.add("bubbles"); 
 bannedWords.add("s***"); // shit
 bannedWords.add("f***"); // fuck
+bannedWords.add("fuk"); // apprently it is a thing
+bannedWords.add("fuc"); // yes this too
 bannedWords.add("f*****"); // fucker
+bannedWords.add("fuker"); // just in case
+bannedWords.add("f******"); // fucking?
 bannedWords.add("ass");
 bannedWords.add("a******"); // asshole
 bannedWords.add("motherfuker"); // yes, it is spelled weird. No, I do not know why. It works, though
@@ -34,6 +38,8 @@ bannedWords.add("b****"); // bitch
 bannedWords.add("bastard");
 bannedWords.add("b*******"); // bullshit
 bannedWords.add("damn");
+bannedWords.add("retarded");
+bannedWords.add("retard");
 
 // POTENTIALLY FIXES THIS ERROR: https://stackoverflow.com/questions/8313628/how-to-emitter-setmaxlisteners
 /* 
@@ -86,13 +92,13 @@ client.on(SpeechEvents.speech, (msg) => {
 				})
 			} else if (userCount[msg.author.username] == 3){
 				member.kick().then(()=>{
-					msg.author.send(msg.author.username + ", you said " + messageArray[i] + ", which is flagged as a bad word. Since this was your fourth warning, you have been kicked from the server. You may re-join the server, but will be banned if you have another offence. You may appeal this with a moderator to reset your warnings.");
+					let errorCatch = msg.author.send(msg.author.username + ", you said " + messageArray[i] + ", which is flagged as a bad word. Since this was your fourth warning, you have been kicked from the server. You may re-join the server, but will be banned if you have another offence. You may appeal this with a moderator to reset your warnings.").catch(e=>{warning_channel.send("We were unable to send " + msg.author.toString() + " a message, but they said " + messageArray[i] + ", which is flagged as a bad word. They have been kicked from the server and will be banned if they come back and make another offence.")});
 					channel.send(msg.author.username + " said this banned word: " + messageArray[i] + ". This is a fourth warning. The user has been kicked from the server."); 
 					userCount[msg.author.username] = userCount[msg.author.username] + 1;
 				})
 			} else {
 				member.ban().then(()=>{
-					msg.author.send(msg.author.username + ", you said " + messageArray[i] + ", which is flagged as a bad word. Since this was your fifth warning, you have been banned from the server. You may attempt to appeal this with a moderator if you wish to re-join again.");
+					let errorCatch = msg.author.send(msg.author.username + ", you said " + messageArray[i] + ", which is flagged as a bad word. Since this was your fifth warning, you have been banned from the server. You may attempt to appeal this with a moderator if you wish to re-join again.").catch(e=>{warning_channel.send("We were unable to send " + msg.author.toString() + " a message, but they said " + messageArray[i] + ", which is flagged as a bad word. They have been banned from the server.")});
 					channel.send(msg.author.username + " said this banned word " + messageArray[i] + ". This has been the user's fifth offense. The user has been banned from the server.");
 				})
 			}
