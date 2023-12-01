@@ -23,6 +23,12 @@ module.exports = {
         if (list == "") {
             interaction.reply("Vigil\'s banned word list currently contains no banned words.")
         } else {
+            for (let i = 0; i < list.length; i++) {
+                if (list.charAt(i) == "*") {
+                    list = list.slice(0, i) + "\\" + list.slice(i);
+                    i++;
+                }
+            }
             interaction.reply(list);
         }
 	},
