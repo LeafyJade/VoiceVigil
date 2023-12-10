@@ -10,7 +10,7 @@ We also want to add a heirarchy system for words, where certain words that are d
 
 Our code currently hardcodes channel IDs for transcription and warning channels. these IDs are, of course, only relevant to the specific test server we used to develop Vigil. In the future, setting up a transcription and warning channel should be done via bot commands. 
 
-# How to set up you own Vigil
+# How to set up your own Vigil
 
 This bot requires a config.json file with your bot's token and client ID. 
 
