@@ -1,24 +1,21 @@
 # VoiceVigil
 
-DO NOT, under ANY circumstances, commit/push the .env or config.json file provided. These are private and contain a key that cannot be shared for the bot. 
+DO NOT, under ANY circumstances, commit/push the .env, config.json, or gspeech.json file provided. These are private and contain a key that cannot be shared for the bot. 
 
-For first time setup, use your terminal to run: 
+For first time setup, use your terminal to run the following two commands: 
 ```
-npm install discord.js13@npm:discord.js@13.16.0
-```
+npm install discord.js
 
-We will be using Discord.js 13.16.0 for now, as there is the most documentation for it. 
+npm i discord-speech-recognition
+```
 
 Use: 
 ```
 npm list discord.js
 ```
-To check your Discord.js version. If you have multiple versions of Discord.js, this may return another value. You can check you have succesfully installed Discord.js 13 with: 
-```
-npm list discord.js13
-```
+To check your Discord.js version. The version should be Discord.js 14.13.0 or something similar. 
 
-The Discord API can be found here: https://discord.js.org/#/docs/discord.js/stable/general/welcome 
+The Discord API can be found here: https://discord.js.org/#/docs/discord.js/stable/general/welcome, though I believe these documents are for Discord.js13. I will add more information when I can. 
 
 To update /text commands, run this in your terminal: 
 ```
