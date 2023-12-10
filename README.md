@@ -14,18 +14,10 @@ Our code currently hardcodes channel IDs for transcription and warning channels.
 
 This bot requires a config.json file with your bot's token and client ID. 
 
-For first time setup, use your terminal to run the following two commands: 
+For first time setup, use your terminal to run the following command: 
 ```
-npm install discord.js
-
-npm i discord-speech-recognition
+npm install
 ```
-
-Use: 
-```
-npm list discord.js
-```
-To check your Discord.js version. The version should be Discord.js 14.13.0 or something similar. 
 
 To update /text commands, run this in your terminal: 
 ```
